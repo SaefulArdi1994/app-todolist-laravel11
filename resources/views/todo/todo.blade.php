@@ -20,11 +20,21 @@
                             <div class="card-body p-4">
 
                                 <h4 class="text-center my-3 pb-3">To Do App</h4>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
-                                <form class="row row-cols-lg-auto g-1 justify-content-center align-items-center mb-4 pb-2">
+                                <form id="todo-form" class="row row-cols-lg-auto g-1 justify-content-center align-items-center mb-4 pb-2" action="{{ url('/todo') }}" method="POST">
+                                    @csrf
                                     <div class="col-12">
                                         <div data-mdb-input-init class="form-outline">
-                                            <input type="text" id="form1" class="form-control" placeholder="Enter a task here" />
+                                            <input type="text" id="form1" class="form-control" placeholder="Enter a task here" value="{{ old('task')}}" />
                                         </div>
                                     </div>
 
